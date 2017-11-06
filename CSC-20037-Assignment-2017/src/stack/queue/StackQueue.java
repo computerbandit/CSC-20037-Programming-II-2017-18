@@ -31,8 +31,8 @@ public class StackQueue {
 
     private Canvas canvas;
     //Drawable stack and queue
-    private DStack userStack;
-    private Rect rect1 = new Rect(100, 100, 100, 100);
+    private final DStack userStack;
+    private final Rect rect1 = new Rect(100, 100, 100, 100);
 
     public StackQueue() {
         userStack = new DStack();
