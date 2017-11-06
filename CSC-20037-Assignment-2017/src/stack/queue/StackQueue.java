@@ -12,6 +12,7 @@ import java.awt.*;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 /**
  *
@@ -21,12 +22,11 @@ public class StackQueue {
 
     //Borders
     private Border blackline = BorderFactory.createLineBorder(Color.gray);
-    private Border loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
     private JFrame frame;
     private JMenuBar menubar;
     private JMenu fileMenu, editMenu, aboutMenu;
     private JMenuItem newMenuItem, loadMenuItem, saveMenuItem, saveAsMenuItem;
-
+    private static JTextArea msgBox;
     private JPanel toolPanel, dataPanel;
 
     private Canvas canvas;
@@ -84,6 +84,23 @@ public class StackQueue {
         dataPanel.setBorder(blackline);
         dataPanel.setPreferredSize(new Dimension(400, 200));
 
+        //msgbox
+        msgBox = new JTextArea();
+
+        msgBox.setBackground(Color.white);
+        msgBox.setEditable(false);
+        msgBox.setRows(10);
+        msgBox.setWrapStyleWord(true);
+        msgBox.setText("Debug Console...");
+        msgBox.setPreferredSize(new Dimension(400, 200));
+        msgBox.setCaretPosition(msgBox.getDocument().getLength());
+        JScrollPane scroll = new JScrollPane(msgBox);
+
+        dataPanel = new JPanel();
+        dataPanel.setBorder(blackline);
+        dataPanel.setPreferredSize(new Dimension(400, 200));
+        dataPanel.add(scroll, BorderLayout.EAST);
+
         menubar.add(fileMenu);
         menubar.add(editMenu);
         menubar.add(aboutMenu);
@@ -119,8 +136,8 @@ public class StackQueue {
     public DStack getDStack() {
         return userStack;
     }
-    
-    public Rect getRect(){
+
+    public Rect getRect() {
         return rect1;
     }
 }
