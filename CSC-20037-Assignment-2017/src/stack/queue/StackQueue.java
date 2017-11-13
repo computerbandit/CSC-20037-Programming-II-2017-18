@@ -10,9 +10,7 @@ import java.awt.Dimension;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 
 /**
  *
@@ -32,16 +30,14 @@ public class StackQueue {
     private Canvas canvas;
     //Drawable stack and queue
     private final DStack userStack;
-    private final Rect rect1 = new Rect(100, 100, 100, 100);
 
     public StackQueue() {
+        int padding = 10;
         userStack = new DStack();
-        userStack.push(rect1);
-        userStack.push(rect1);
-        userStack.push(rect1);
-        userStack.push(rect1);
+        for (int i = 0; i < 10; i++) {
+            userStack.push(new Rect(10, 20 * i + padding, 20, 20));
+        }
         initGUI();
-
     }
 
     private void initGUI() {
@@ -49,8 +45,10 @@ public class StackQueue {
         //Making the main frame for the application simple layout
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(800, 640));
+        frame.setMinimumSize(new Dimension(800, 720));
         frame.setTitle("CSC-20037 Stacks and Queues || 0.1a");
+        JPanel mainPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
         //Menu Bar Stuff
         menubar = new JMenuBar();
@@ -89,26 +87,55 @@ public class StackQueue {
 
         msgBox.setBackground(Color.white);
         msgBox.setEditable(false);
-        msgBox.setRows(10);
+        msgBox.setAutoscrolls(true);
+        msgBox.setRows(5);
         msgBox.setWrapStyleWord(true);
+        msgBox.setPreferredSize(new Dimension(750, 120));
         msgBox.setText("Debug Console...");
-        msgBox.setPreferredSize(new Dimension(400, 200));
         msgBox.setCaretPosition(msgBox.getDocument().getLength());
         JScrollPane scroll = new JScrollPane(msgBox);
-
+        
         dataPanel = new JPanel();
         dataPanel.setBorder(blackline);
-        dataPanel.setPreferredSize(new Dimension(400, 200));
-        dataPanel.add(scroll, BorderLayout.EAST);
+
+        dataPanel.setPreferredSize(new Dimension(750, 120));
+        dataPanel.add(scroll, BorderLayout.PAGE_START);
 
         menubar.add(fileMenu);
         menubar.add(editMenu);
         menubar.add(aboutMenu);
 
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        c.weightx = 0.3;
+
+        c.ipady = 500;
+        c.insets = new Insets(10, 10, 0, 10);
+
+        mainPanel.add(toolPanel, c);
+        c.gridx = 1;
+        c.gridy = 0;
+        c.gridwidth = 1;
+        c.gridheight = 1;
+        c.weightx = 0.7;
+
+        c.ipady = 500;
+        mainPanel.add(canvas, c);
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridwidth = 2;
+        c.gridheight = 1;
+        c.weighty = 1.0;   //request any extra vertical space
+        c.ipady = 100;
+        c.insets = new Insets(10, 0, 0, 0);
+        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+        mainPanel.add(dataPanel, c);
+
         frame.add(menubar, BorderLayout.PAGE_START);
-        frame.add(canvas, BorderLayout.CENTER);
-        frame.add(dataPanel, BorderLayout.SOUTH);
-        frame.add(toolPanel, BorderLayout.LINE_START);
+        frame.add(mainPanel);
 
         //frame.pack();
         frame.setVisible(true);
@@ -129,6 +156,10 @@ public class StackQueue {
         StackQueue app = new StackQueue();
     }
 
+    public static void log(String s) {
+        msgBox.append("\n " + s);
+    }
+
     public Canvas getCanvas() {
         return canvas;
     }
@@ -137,7 +168,4 @@ public class StackQueue {
         return userStack;
     }
 
-    public Rect getRect() {
-        return rect1;
-    }
 }

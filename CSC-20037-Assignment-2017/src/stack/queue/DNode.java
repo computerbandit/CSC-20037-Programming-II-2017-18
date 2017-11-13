@@ -17,16 +17,14 @@ public class DNode extends Node implements Drawable {
         super(obj, next);
     }
 
+    @Override
     public DNode getNext() {
         return (DNode) next;
     }
 
     @Override
     public void draw(Graphics g) {
-        System.out.print("i am here \n");
-        if (this.getObject() instanceof Drawable) {
-            Drawable dObj = (Drawable) getObject();
-            dObj.draw(g);
-        }
+        Drawable dObj = (Drawable) getObject();
+        dObj.draw(g);
     }
 }
