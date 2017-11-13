@@ -55,7 +55,7 @@ public class Rect extends Shape implements Drawable {
         return this.width;
     }
 
-    public int getheight() {
+    public int getHeight() {
         return this.height;
     }
 }

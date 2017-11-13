@@ -62,10 +62,9 @@ public class DStack extends Stack implements Drawable {
 
     @Override
     public void draw(Graphics g) {
+        StackQueue.log(""+size());
         for (int i = size() - 1; i >= 0; i--) {
-            DNode node = this.atIndex(i);
-            Drawable dObj = (Drawable) node.getObject();
-            dObj.draw(g);
+            atIndex(i).draw(g);
         }
     }
 }

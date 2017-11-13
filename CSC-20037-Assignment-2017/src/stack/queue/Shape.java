@@ -60,6 +60,4 @@ public abstract class Shape implements Drawable {
     public void setColor(int color){
         this.color = color;
     }
-    
-    
 }
