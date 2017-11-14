@@ -12,6 +12,8 @@ import java.awt.Graphics;
  * @author w4f21
  */
 public class DNode extends Node implements Drawable {
+    
+    
 
     public DNode(Object obj, Node next) {
         super(obj, next);

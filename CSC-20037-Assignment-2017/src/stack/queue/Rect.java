@@ -5,7 +5,6 @@
  */
 package stack.queue;
 
-
 import java.awt.Graphics;
 
 /**
@@ -16,20 +15,20 @@ public class Rect extends Shape implements Drawable {
 
     private int width, height;
 
-    public Rect(int x, int y, int w, int h, int color, boolean filled) {
-        super(x, y, color, filled);
+    public Rect(Point xy, int w, int h, int color, boolean filled) {
+        super(xy, color, filled);
         this.width = w;
         this.height = h;
     }
 
-    public Rect(int x, int y, int w, int h, int color) {
-        super(x, y, color);
+    public Rect(Point xy, int w, int h, int color) {
+        super(xy, color);
         this.width = w;
         this.height = h;
     }
 
-    public Rect(int x, int y, int w, int h) {
-        super(x, y);
+    public Rect(Point xy, int w, int h) {
+        super(xy);
         this.width = w;
         this.height = h;
     }
@@ -37,9 +36,9 @@ public class Rect extends Shape implements Drawable {
     @Override
     public void draw(Graphics g) {
         if (getFilled()) {
-            g.fillRect(x, y, width, height);
+            g.fillRect(xy.getX(), xy.getY(), width, height);
         } else {
-            g.drawRect(x, y, width, height);
+            g.drawRect(xy.getX(), xy.getY(), width, height);
         }
     }
 

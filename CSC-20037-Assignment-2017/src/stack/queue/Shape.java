@@ -12,34 +12,27 @@ package stack.queue;
  */
 public abstract class Shape implements Drawable {
 
-    protected int x, y;
+    protected Point xy;
     protected int color = 0x000000;
     protected boolean filled = false;
 
-    public Shape(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Shape(Point xy) {
+        this.xy = xy;
     }
 
-    public Shape(int x, int y, int color) {
-        this.x = x;
-        this.y = y;
+    public Shape(Point xy, int color) {
+        this.xy = xy;
         this.color = color;
     }
 
-    public Shape(int x, int y, int color, boolean filled) {
-        this.x = x;
-        this.y = y;
+    public Shape(Point xy, int color, boolean filled) {
+        this.xy = xy;
         this.color = color;
         this.filled = filled;
     }
 
-    public int getX() {
-        return this.x;
-    }
-
-    public int getY() {
-        return this.y;
+    public Point getXY() {
+        return this.xy;
     }
 
     public int getColor() {
@@ -48,13 +41,6 @@ public abstract class Shape implements Drawable {
     
     public boolean getFilled(){
         return this.filled;
-    }
-
-    public void setX(int x){
-        this.x = x;
-    }
-    public void setY(int y){
-        this.y = y;
     }
     
     public void setColor(int color){

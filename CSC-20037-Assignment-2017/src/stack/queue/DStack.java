@@ -12,7 +12,7 @@ import java.awt.Graphics;
  * @author w4f21
  */
 public class DStack extends Stack implements Drawable {
-
+    
     private DNode head;
 
     public DStack() {

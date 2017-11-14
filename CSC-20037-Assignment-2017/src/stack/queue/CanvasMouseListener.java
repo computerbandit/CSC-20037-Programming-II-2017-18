@@ -22,12 +22,12 @@ public class CanvasMouseListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        Canvas canvas = app.getCanvas();
-
-        app.getDStack().push(new Rect(e.getX(), e.getY(), 10, 10));
-
-        app.getDStack().print();
-        canvas.repaint();
+//        Canvas canvas = app.getCanvas();
+//
+//        app.getDStack().push(new Rect(e.getX(), e.getY(), 10, 10));
+//
+//        //app.getDStack().print();
+//        canvas.repaint();
     }
 
     @Override

@@ -33,11 +33,10 @@ public class StackQueue {
 
     public StackQueue() {
         int padding = 10;
-        userStack = new DStack();
-        for (int i = 0; i < 10; i++) {
-            userStack.push(new Rect(10, 20 * i + padding, 20, 20));
-        }
+
         initGUI();
+        userStack = new DStack();
+        
     }
 
     private void initGUI() {
@@ -94,7 +93,7 @@ public class StackQueue {
         msgBox.setText("Debug Console...");
         msgBox.setCaretPosition(msgBox.getDocument().getLength());
         JScrollPane scroll = new JScrollPane(msgBox);
-        
+
         dataPanel = new JPanel();
         dataPanel.setBorder(blackline);
 
