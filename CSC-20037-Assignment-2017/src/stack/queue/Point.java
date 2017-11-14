@@ -2,6 +2,10 @@ package stack.queue;
 
 public class Point {
 
+    public static Point add(Point offset, Point xy) {
+        return new Point(xy.getX() + offset.getX(), xy.getY() + offset.getY());
+    }
+
     private int x, y;
 
     Point(int x, int y) {

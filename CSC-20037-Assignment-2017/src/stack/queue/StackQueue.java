@@ -35,8 +35,15 @@ public class StackQueue {
         int padding = 10;
 
         initGUI();
+        //
         userStack = new DStack(new Point(canvas.getWidth()/2, canvas.getHeight()/2));
-        
+        //push the first item onto the stack such that it is not empty.
+        userStack.push(new Rect(new Point(0,0), 20, 20, 10, true));
+        //retrive the first object in the stack
+        Rect temp = (Rect) userStack.peek().getObject();
+        //center the stack to the middle of the screen this is done by getting the width of the first drawable object in the stack...
+        //then offsetting the entire stack by adding the negative of half the width of the object.
+        userStack.getXY().setX(userStack.getXY().getX()+(-temp.getWidth()/2));
     }
 
     private void initGUI() {
@@ -45,7 +52,7 @@ public class StackQueue {
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(800, 720));
-        frame.setTitle("CSC-20037 Stacks and Queues || 0.1a");
+        frame.setTitle("CSC-20037 Stacks and Queues || 0.2sa");
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 

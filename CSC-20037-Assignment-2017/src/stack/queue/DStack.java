@@ -66,7 +66,7 @@ public class DStack extends Stack implements Drawable {
     public void draw(Graphics g, Point offset) {
         StackQueue.log("" + size());
         for (int i = size() - 1; i >= 0; i--) {
-            atIndex(i).draw(g, offset);
+            atIndex(i).draw(g, Point.add(offset, xy));
         }
     }
     
