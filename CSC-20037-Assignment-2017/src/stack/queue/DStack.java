@@ -12,11 +12,13 @@ import java.awt.Graphics;
  * @author w4f21
  */
 public class DStack extends Stack implements Drawable {
-    
-    private DNode head;
 
-    public DStack() {
+    private DNode head;
+    private Point xy;
+    
+    public DStack(Point xy) {
         super();
+        this.xy = xy;
     }
 
     @Override
@@ -61,10 +63,14 @@ public class DStack extends Stack implements Drawable {
     }
 
     @Override
-    public void draw(Graphics g) {
-        StackQueue.log(""+size());
+    public void draw(Graphics g, Point offset) {
+        StackQueue.log("" + size());
         for (int i = size() - 1; i >= 0; i--) {
-            atIndex(i).draw(g);
+            atIndex(i).draw(g, offset);
         }
+    }
+    
+    public Point getXY(){
+        return xy;
     }
 }

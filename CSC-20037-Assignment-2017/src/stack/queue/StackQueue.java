@@ -35,7 +35,7 @@ public class StackQueue {
         int padding = 10;
 
         initGUI();
-        userStack = new DStack();
+        userStack = new DStack(new Point(canvas.getWidth()/2, canvas.getHeight()/2));
         
     }
 
@@ -89,7 +89,7 @@ public class StackQueue {
         msgBox.setAutoscrolls(true);
         msgBox.setRows(5);
         msgBox.setWrapStyleWord(true);
-        msgBox.setPreferredSize(new Dimension(750, 120));
+        msgBox.setPreferredSize(new Dimension(500, 120));
         msgBox.setText("Debug Console...");
         msgBox.setCaretPosition(msgBox.getDocument().getLength());
         JScrollPane scroll = new JScrollPane(msgBox);
@@ -97,8 +97,8 @@ public class StackQueue {
         dataPanel = new JPanel();
         dataPanel.setBorder(blackline);
 
-        dataPanel.setPreferredSize(new Dimension(750, 120));
-        dataPanel.add(scroll, BorderLayout.PAGE_START);
+        dataPanel.setPreferredSize(new Dimension(600, 120));
+        dataPanel.add(scroll, BorderLayout.EAST);
 
         menubar.add(fileMenu);
         menubar.add(editMenu);
@@ -129,7 +129,7 @@ public class StackQueue {
         c.gridheight = 1;
         c.weighty = 1.0;   //request any extra vertical space
         c.ipady = 100;
-        c.insets = new Insets(10, 0, 0, 0);
+        c.insets = new Insets(10, 10, 10, 10);
         c.anchor = GridBagConstraints.PAGE_END; //bottom of space
         mainPanel.add(dataPanel, c);
 

@@ -13,5 +13,5 @@ import java.awt.Graphics;
  */
 public interface Drawable {
     
-    void draw(Graphics c);
+    void draw(Graphics g, Point offset);
 }

@@ -12,8 +12,6 @@ import java.awt.Graphics;
  * @author w4f21
  */
 public class DNode extends Node implements Drawable {
-    
-    
 
     public DNode(Object obj, Node next) {
         super(obj, next);
@@ -25,8 +23,8 @@ public class DNode extends Node implements Drawable {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics g, Point offset) {
         Drawable dObj = (Drawable) getObject();
-        dObj.draw(g);
+        dObj.draw(g, offset);
     }
 }

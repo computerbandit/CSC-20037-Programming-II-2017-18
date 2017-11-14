@@ -33,15 +33,6 @@ public class Rect extends Shape implements Drawable {
         this.height = h;
     }
 
-    @Override
-    public void draw(Graphics g) {
-        if (getFilled()) {
-            g.fillRect(xy.getX(), xy.getY(), width, height);
-        } else {
-            g.drawRect(xy.getX(), xy.getY(), width, height);
-        }
-    }
-
     public void setWidth(int width) {
         this.width = width;
     }
@@ -56,5 +47,14 @@ public class Rect extends Shape implements Drawable {
 
     public int getHeight() {
         return this.height;
+    }
+
+    @Override
+    public void draw(Graphics g, Point offset) {
+        if (getFilled()) {
+            g.fillRect(xy.getX() + offset.getX(), xy.getY() + offset.getY(), width, height);
+        } else {
+            g.drawRect(xy.getX() + offset.getX(), xy.getY() + offset.getY(), width, height);
+        }
     }
 }
