@@ -26,6 +26,7 @@ public class StackQueue {
     private JMenuItem newMenuItem, loadMenuItem, saveMenuItem, saveAsMenuItem;
     private static JTextArea msgBox;
     private JPanel toolPanel, dataPanel;
+    private JButton stackButton, queueButton, addButton;
 
     private Canvas canvas;
     //Drawable stack and queue
@@ -36,14 +37,14 @@ public class StackQueue {
 
         initGUI();
         //
-        userStack = new DStack(new Point(canvas.getWidth()/2, canvas.getHeight()/2));
+        userStack = new DStack(new Point(canvas.getWidth() / 2, canvas.getHeight() / 2));
         //push the first item onto the stack such that it is not empty.
-        userStack.push(new Rect(new Point(0,0), 20, 20, 10, true));
+        userStack.push(new Rect(new Point(0, 0), 20, 20, 10, false));
         //retrive the first object in the stack
         Rect temp = (Rect) userStack.peek().getObject();
         //center the stack to the middle of the screen this is done by getting the width of the first drawable object in the stack...
         //then offsetting the entire stack by adding the negative of half the width of the object.
-        userStack.getXY().setX(userStack.getXY().getX()+(-temp.getWidth()/2));
+        userStack.getXY().setX(userStack.getXY().getX() + (-temp.getWidth() / 2));
     }
 
     private void initGUI() {
@@ -53,8 +54,6 @@ public class StackQueue {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(800, 720));
         frame.setTitle("CSC-20037 Stacks and Queues || 0.2sa");
-        JPanel mainPanel = new JPanel(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
 
         //Menu Bar Stuff
         menubar = new JMenuBar();
@@ -80,9 +79,20 @@ public class StackQueue {
         canvas.addMouseListener(new CanvasMouseListener(this));
         canvas.setBackground(Color.white);
 
-        toolPanel = new JPanel();
+        toolPanel = new JPanel(new GridLayout(3, 1));
         toolPanel.setBorder(blackline);
         toolPanel.setPreferredSize(new Dimension(250, 400));
+
+        addButton = new JButton("Add");
+        addButton.addActionListener(new addButtonListener(this));
+        addButton.setPreferredSize(new Dimension(200, 40));
+        toolPanel.add(addButton);
+        stackButton = new JButton("Stack");
+        stackButton.setPreferredSize(new Dimension(200, 40));
+        toolPanel.add(stackButton);
+        queueButton = new JButton("Queue");
+        queueButton.setPreferredSize(new Dimension(200, 40));
+        toolPanel.add(queueButton);
 
         dataPanel = new JPanel();
         dataPanel.setBorder(blackline);
@@ -111,37 +121,10 @@ public class StackQueue {
         menubar.add(editMenu);
         menubar.add(aboutMenu);
 
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridwidth = 1;
-        c.gridheight = 1;
-        c.weightx = 0.3;
-
-        c.ipady = 500;
-        c.insets = new Insets(10, 10, 0, 10);
-
-        mainPanel.add(toolPanel, c);
-        c.gridx = 1;
-        c.gridy = 0;
-        c.gridwidth = 1;
-        c.gridheight = 1;
-        c.weightx = 0.7;
-
-        c.ipady = 500;
-        mainPanel.add(canvas, c);
-        c.gridx = 0;
-        c.gridy = 1;
-        c.gridwidth = 2;
-        c.gridheight = 1;
-        c.weighty = 1.0;   //request any extra vertical space
-        c.ipady = 100;
-        c.insets = new Insets(10, 10, 10, 10);
-        c.anchor = GridBagConstraints.PAGE_END; //bottom of space
-        mainPanel.add(dataPanel, c);
-
         frame.add(menubar, BorderLayout.PAGE_START);
-        frame.add(mainPanel);
+        frame.add(toolPanel, BorderLayout.EAST);
+        frame.add(canvas, BorderLayout.CENTER);
+        frame.add(dataPanel, BorderLayout.PAGE_END);
 
         //frame.pack();
         frame.setVisible(true);
@@ -173,5 +156,4 @@ public class StackQueue {
     public DStack getDStack() {
         return userStack;
     }
-
 }
