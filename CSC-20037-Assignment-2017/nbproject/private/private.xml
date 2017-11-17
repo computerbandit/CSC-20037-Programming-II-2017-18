@@ -3,12 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/Documents/_Programming/Java/Workspace/CSC-20037-Programming-II-2017-18/CSC-20037-Assignment-2017/src/stack/queue/Rect.java</file>
             <file>file:/D:/Documents/_Programming/Java/Workspace/CSC-20037-Programming-II-2017-18/CSC-20037-Assignment-2017/src/stack/queue/Canvas.java</file>
             <file>file:/D:/Documents/_Programming/Java/Workspace/CSC-20037-Programming-II-2017-18/CSC-20037-Assignment-2017/src/stack/queue/DStack.java</file>
             <file>file:/D:/Documents/_Programming/Java/Workspace/CSC-20037-Programming-II-2017-18/CSC-20037-Assignment-2017/src/stack/queue/Point.java</file>
             <file>file:/D:/Documents/_Programming/Java/Workspace/CSC-20037-Programming-II-2017-18/CSC-20037-Assignment-2017/src/stack/queue/StackQueue.java</file>
             <file>file:/D:/Documents/_Programming/Java/Workspace/CSC-20037-Programming-II-2017-18/CSC-20037-Assignment-2017/src/stack/queue/DNode.java</file>
+=======
+            <file>file://ufs.stf.keele.ac.uk/homes/My%20Documents/NetBeansProjects/CSC-20037-Programming-II-2017-18-master/CSC-20037-Assignment-2017/src/stack/queue/Rect.java</file>
+            <file>file://ufs.stf.keele.ac.uk/homes/My%20Documents/NetBeansProjects/CSC-20037-Programming-II-2017-18-master/CSC-20037-Assignment-2017/src/stack/queue/Stack.java</file>
+            <file>file://ufs.stf.keele.ac.uk/homes/My%20Documents/NetBeansProjects/CSC-20037-Programming-II-2017-18-master/CSC-20037-Assignment-2017/src/stack/queue/Canvas.java</file>
+            <file>file://ufs.stf.keele.ac.uk/homes/My%20Documents/NetBeansProjects/CSC-20037-Programming-II-2017-18-master/CSC-20037-Assignment-2017/src/stack/queue/Node.java</file>
+            <file>file://ufs.stf.keele.ac.uk/homes/My%20Documents/NetBeansProjects/CSC-20037-Programming-II-2017-18-master/CSC-20037-Assignment-2017/src/stack/queue/StackQueue.java</file>
+            <file>file://ufs.stf.keele.ac.uk/homes/My%20Documents/NetBeansProjects/CSC-20037-Programming-II-2017-18-master/CSC-20037-Assignment-2017/src/stack/queue/DStack.java</file>
+            <file>file://ufs.stf.keele.ac.uk/homes/My%20Documents/NetBeansProjects/CSC-20037-Programming-II-2017-18-master/CSC-20037-Assignment-2017/src/stack/queue/DNode.java</file>
+>>>>>>> a00eda4f0c642350896772eb017eee7587944a6c
         </group>
     </open-files>
 </project-private>
