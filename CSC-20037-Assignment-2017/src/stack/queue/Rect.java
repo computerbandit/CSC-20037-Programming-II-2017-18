@@ -14,7 +14,7 @@ import java.awt.Graphics;
 public class Rect extends Shape implements Drawable {
 
     private int width, height;
-    private String text;
+    private String text = "";
 
     public Rect(Point xy, int w, int h, int color, boolean filled) {
         super(xy, color, filled);
@@ -62,8 +62,10 @@ public class Rect extends Shape implements Drawable {
     public void draw(Graphics g, Point offset) {
         if (getFilled()) {
             g.fillRect(xy.getX() + offset.getX(), xy.getY() + offset.getY(), width, height);
+            g.drawString(text, xy.getX() + offset.getX(), xy.getY() + offset.getY());
         } else {
             g.drawRect(xy.getX() + offset.getX(), xy.getY() + offset.getY(), width, height);
+            g.drawString(text, xy.getX() + offset.getX(), xy.getY() + offset.getY());
         }
     }
 }

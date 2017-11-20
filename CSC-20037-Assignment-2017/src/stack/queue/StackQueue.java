@@ -26,27 +26,23 @@ public class StackQueue {
     private JMenuItem newMenuItem, loadMenuItem, saveMenuItem, saveAsMenuItem;
     private static JTextArea msgBox;
     private JPanel toolPanel, dataPanel;
-    private JButton stackButton, queueButton, addButton;
+    private JButton stackButton, queueButton, addButton, removeButton;
 
     private Canvas canvas;
     //Drawable stack and queue
-    private final DStack userStack;
+    private final DStack stack;
+    private final Queue queue;
+    private boolean appState;
 
     public StackQueue() {
-        int padding = 10;
-
         initGUI();
-        //
-        userStack = new DStack(new Point(canvas.getWidth() / 2, canvas.getHeight() / 2));
-        //push the first item onto the stack such that it is not empty.
-        userStack.push(new Rect(new Point(0, 0), 20, 20, 10, false));
-        //retrive the first object in the stack
-        Rect temp = (Rect) userStack.peek().getObject();
-        //center the stack to the middle of the screen this is done by getting the width of the first drawable object in the stack...
-        //then offsetting the entire stack by adding the negative of half the width of the object.
-        userStack.getXY().setX(userStack.getXY().getX() + (-temp.getWidth() / 2));
+        /*stack stuff*/
+        stack = new DStack(new Point(canvas.getWidth() / 2, canvas.getHeight() - 100));
+        
+        queue = new Queue();
+        appState = true;
     }
-
+    
     private void initGUI() {
 
         //Making the main frame for the application simple layout
@@ -79,20 +75,30 @@ public class StackQueue {
         canvas.addMouseListener(new CanvasMouseListener(this));
         canvas.setBackground(Color.white);
 
-        toolPanel = new JPanel(new GridLayout(3, 1));
+        toolPanel = new JPanel(new GridLayout(10, 1));
         toolPanel.setBorder(blackline);
         toolPanel.setPreferredSize(new Dimension(250, 400));
 
+        stackButton = new JButton("Stack");
+        stackButton.setFont(new Font("Tahoma", Font.BOLD, 12));
+        stackButton.setBackground(new Color(0, 51, 204));
+        stackButton.setForeground(new Color(0, 51, 204));
+        stackButton.setFocusPainted(false);
+        stackButton.setBorderPainted(false);
+        toolPanel.add(stackButton);
+
+        queueButton = new JButton("Queue");
+        toolPanel.add(queueButton);
+        toolPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
+
         addButton = new JButton("Add");
         addButton.addActionListener(new addButtonListener(this));
-        addButton.setPreferredSize(new Dimension(200, 40));
         toolPanel.add(addButton);
-        stackButton = new JButton("Stack");
-        stackButton.setPreferredSize(new Dimension(200, 40));
-        toolPanel.add(stackButton);
-        queueButton = new JButton("Queue");
-        queueButton.setPreferredSize(new Dimension(200, 40));
-        toolPanel.add(queueButton);
+        
+        removeButton = new JButton("Remove");
+        removeButton.addActionListener(new removeButtonListener(this));
+        toolPanel.add(removeButton);
+        
 
         dataPanel = new JPanel();
         dataPanel.setBorder(blackline);
@@ -122,7 +128,7 @@ public class StackQueue {
         menubar.add(aboutMenu);
 
         frame.add(menubar, BorderLayout.PAGE_START);
-        frame.add(toolPanel, BorderLayout.EAST);
+        frame.add(toolPanel, BorderLayout.WEST);
         frame.add(canvas, BorderLayout.CENTER);
         frame.add(dataPanel, BorderLayout.PAGE_END);
 
@@ -154,6 +160,6 @@ public class StackQueue {
     }
 
     public DStack getDStack() {
-        return userStack;
+        return stack;
     }
 }
