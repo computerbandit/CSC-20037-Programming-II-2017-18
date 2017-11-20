@@ -38,6 +38,7 @@ public class StackQueue {
     
     public StackQueue() {
         initGUI();
+        
         /*stack stuff*/
         stack = new Stack();
         queue = new Queue();
@@ -71,12 +72,15 @@ public class StackQueue {
         fileMenu.add(saveMenuItem);
         fileMenu.add(saveAsMenuItem);
         
+        
+        
         canvas = new Canvas(this);
         canvas.setBorder(new LineBorder(Color.gray));
         canvas.setPreferredSize(new Dimension(500, 500));
         canvas.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
         canvas.addMouseListener(new CanvasMouseListener(this));
         canvas.setBackground(Color.white);
+        
         
         toolPanel = new JPanel(new GridLayout(10, 1));
         toolPanel.setBorder(blackline);

@@ -27,6 +27,6 @@ public class Canvas extends JPanel{
     }
 
     private void draw(Graphics g) {
-        app.getStack().draw(g);
+        app.getStack().draw(g, app);
     }
 }

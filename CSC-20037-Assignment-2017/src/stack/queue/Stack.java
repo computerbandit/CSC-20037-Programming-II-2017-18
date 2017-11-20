@@ -75,11 +75,11 @@ public class Stack implements Drawable{
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics g, StackQueue appRef) {
         Node n = head;
+
         while(n!=null){
-            Rect dnode = (Rect) n.getObject();
-            dnode.draw(g);
+            
             n = n.getNext();
         }
     }

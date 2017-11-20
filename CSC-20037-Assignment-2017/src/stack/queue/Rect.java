@@ -71,14 +71,14 @@ public class Rect extends Shape {
     }
 
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics g, StackQueue appRef) {
         if (getFilled()) {
-            g.fillRoundRect(xy.getX(), xy.getY(), width, height, 1, 1);
+            g.fillRoundRect(xy.getX(), xy.getY(), width, height, 10, 10);
         } else {
-            g.drawRoundRect(xy.getX(), xy.getY(), width, height, 1, 1);
+            g.drawRoundRect(xy.getX(), xy.getY(), width, height, 10, 10);
         }
         if (!text.isEmpty()) {
-            g.drawString(text, getCenter().getX(), getCenter().getY());
+            g.drawString(text, getCenter().getX() - (text.length()), getCenter().getY());
         }
     }
 }

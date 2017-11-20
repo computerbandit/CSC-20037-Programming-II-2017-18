@@ -13,5 +13,5 @@ import java.awt.Graphics;
  */
 public interface Drawable {
     
-    void draw(Graphics g);
+    void draw(Graphics g, StackQueue appRef);
 }

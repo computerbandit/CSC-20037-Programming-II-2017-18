@@ -18,14 +18,13 @@ public class addButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
+        //TODO This needs to be on Resize function need to be added
+        /*this si so that the stack is repostionsned after the frame is resized insuring that the stack is in the center.*/
+        
         Stack stack = app.getStack();
         Canvas canvas = app.getCanvas();
-        if (stack.isEmpty()) {
-            stack.push(new Rect(new Point(canvas.getWidth() / 2 - 100, canvas.getHeight() - 100), 200, 50, 10, false, "999"));
-        } else {
-            Rect peek = (Rect) stack.peek().getObject();
-            stack.push(new Rect(new Point (peek.xy.getX(), peek.xy.getY() - (peek.getHeight() + 20)), peek.getWidth(), peek.getHeight(), 10, false, "999"));
-        }
+        stack.push(0);
         canvas.repaint();
     }
 
