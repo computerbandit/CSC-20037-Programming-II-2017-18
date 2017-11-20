@@ -11,10 +11,17 @@ import java.awt.Graphics;
  *
  * @author w4f21
  */
-public class Rect extends Shape implements Drawable {
+public class Rect extends Shape {
 
     private int width, height;
     private String text = "";
+
+    public Rect(Point xy, int w, int h, int color, boolean filled, String text) {
+        super(xy, color, filled);
+        this.text = text;
+        this.width = w;
+        this.height = h;
+    }
 
     public Rect(Point xy, int w, int h, int color, boolean filled) {
         super(xy, color, filled);
@@ -33,6 +40,7 @@ public class Rect extends Shape implements Drawable {
         this.width = w;
         this.height = h;
     }
+   
 
     public void setText(String text) {
         this.text = text;
@@ -58,14 +66,19 @@ public class Rect extends Shape implements Drawable {
         return this.height;
     }
 
+    public Point getCenter() {
+        return new Point(xy.getX() + width/2, xy.getY() + height/2);
+    }
+
     @Override
     public void draw(Graphics g) {
         if (getFilled()) {
             g.fillRoundRect(xy.getX(), xy.getY(), width, height, 1, 1);
-            g.drawString(text, xy.getX(), xy.getY());
         } else {
             g.drawRoundRect(xy.getX(), xy.getY(), width, height, 1, 1);
-            g.drawString(text, xy.getX(), xy.getY());
+        }
+        if (!text.isEmpty()) {
+            g.drawString(text, getCenter().getX(), getCenter().getY());
         }
     }
 }

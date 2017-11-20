@@ -11,8 +11,7 @@ package stack.queue;
  */
 public class Node {
 
-    protected Node next;
-
+    private Node next;
     private Object obj;
 
     public Node(Object obj, Node next) {

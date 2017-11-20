@@ -12,7 +12,7 @@ import javax.swing.JPanel;
  *
  * @author w4f21
  */
-public class Canvas extends JPanel {
+public class Canvas extends JPanel{
     //this is just a quick test
     StackQueue app;
 

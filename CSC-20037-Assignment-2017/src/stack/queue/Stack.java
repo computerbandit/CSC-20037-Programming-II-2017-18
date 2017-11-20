@@ -11,9 +11,9 @@ import java.awt.Graphics;
  *
  * @author w4f21
  */
-public class Stack {
+public class Stack implements Drawable{
 
-    protected int size;
+    private int size;
     private Node head;
 
     public Stack() {
@@ -50,9 +50,9 @@ public class Stack {
 
     public Node atIndex(int index) {
         if (isEmpty()) {
-            return null;
+            return null; //
         } else if (index >= size) {
-            return null;
+            return null; //overflow error
         }
         Node n = head;
         for (int i = size - 1; i >= 0; i--) {
@@ -62,7 +62,7 @@ public class Stack {
                 n = n.getNext();
             }
         }
-        return null;
+        return null;//underflow error;
     }
 
     public void print() {
@@ -74,19 +74,13 @@ public class Stack {
         System.out.print("\n");
     }
 
-    public static void main(String args[]) {
-        Stack stack = new Stack();
-
-        stack.push(10);
-        stack.push(11);
-        stack.push(12);
-        stack.push(13);
-
-        System.out.print("TEST\n");
-        stack.print();
-        System.out.print(stack.peek());
-    }
-
-    void draw(Graphics g) {
+    @Override
+    public void draw(Graphics g) {
+        Node n = head;
+        while(n!=null){
+            Rect dnode = (Rect) n.getObject();
+            dnode.draw(g);
+            n = n.getNext();
+        }
     }
 }
