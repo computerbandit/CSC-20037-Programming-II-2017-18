@@ -5,6 +5,8 @@
  */
 package stack.queue;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author w4f21
@@ -62,21 +64,6 @@ public class Stack {
         }
         return null;
     }
-    
-    public int find(Object obj) {
-        if (isEmpty()) {
-            return -2;
-        }
-        Node n = head;
-        for (int i = size - 1; i >= 0; i--) {
-            if (n.getObject() == obj) {
-                return i;
-            } else {
-                n = n.getNext();
-            }
-        }
-        return -1;
-    }
 
     public void print() {
         System.out.print("Size: " + size + "\n");
@@ -98,5 +85,8 @@ public class Stack {
         System.out.print("TEST\n");
         stack.print();
         System.out.print(stack.peek());
+    }
+
+    void draw(Graphics g) {
     }
 }

@@ -13,7 +13,7 @@ public class removeButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        app.getDStack().pop();
+        app.getStack().pop();
         app.getCanvas().repaint();
     }
 }

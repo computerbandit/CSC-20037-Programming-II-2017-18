@@ -22,8 +22,14 @@ public class addButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        app.getDStack().push(new Rect(new Point(app.getDStack().getXY()), 100, 20, 10, true));  
-        app.getCanvas().repaint();
+        Stack stack = app.getStack();
+        Canvas canvas = app.getCanvas();
+        if(stack.isEmpty()){
+            stack.push(new Rect(new Point(canvas.getWidth()/2 - 100, canvas.getHeight() - 50), 200, 100));
+        }else{
+            
+        }
+        canvas.repaint();
     }
 
 }

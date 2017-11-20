@@ -59,13 +59,13 @@ public class Rect extends Shape implements Drawable {
     }
 
     @Override
-    public void draw(Graphics g, Point offset) {
+    public void draw(Graphics g) {
         if (getFilled()) {
-            g.fillRect(xy.getX() + offset.getX(), xy.getY() + offset.getY(), width, height);
-            g.drawString(text, xy.getX() + offset.getX(), xy.getY() + offset.getY());
+            g.fillRoundRect(xy.getX(), xy.getY(), width, height, 1, 1);
+            g.drawString(text, xy.getX(), xy.getY());
         } else {
-            g.drawRect(xy.getX() + offset.getX(), xy.getY() + offset.getY(), width, height);
-            g.drawString(text, xy.getX() + offset.getX(), xy.getY() + offset.getY());
+            g.drawRoundRect(xy.getX(), xy.getY(), width, height, 1, 1);
+            g.drawString(text, xy.getX(), xy.getY());
         }
     }
 }

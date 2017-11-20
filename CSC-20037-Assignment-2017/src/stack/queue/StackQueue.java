@@ -30,14 +30,14 @@ public class StackQueue {
 
     private Canvas canvas;
     //Drawable stack and queue
-    private final DStack stack;
+    private final Stack stack;
     private final Queue queue;
     private boolean appState;
 
     public StackQueue() {
         initGUI();
         /*stack stuff*/
-        stack = new DStack(new Point(canvas.getWidth() / 2, canvas.getHeight() - 100));
+        stack = new Stack();
         
         queue = new Queue();
         appState = true;
@@ -159,7 +159,7 @@ public class StackQueue {
         return canvas;
     }
 
-    public DStack getDStack() {
+    public Stack getStack() {
         return stack;
     }
 }
