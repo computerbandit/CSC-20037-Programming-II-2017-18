@@ -12,19 +12,19 @@ package stack.queue;
 public class Node {
 
     private Node next;
-    private Object obj;
+    private int data;
 
-    public Node(Object obj, Node next) {
-        this.obj = obj;
+    public Node(int data, Node next) {
+        this.data = data;
         this.next = next;
     }
 
-    public Object getObject() {
-        return obj;
+    public int getData() {
+        return data;
     }
 
-    public void setObject(Object object) {
-        this.obj = object;
+    public void setData(int data) {
+        this.data = data;
     }
 
     public Node getNext() {

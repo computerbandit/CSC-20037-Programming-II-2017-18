@@ -5,6 +5,7 @@
  */
 package stack.queue;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -15,24 +16,14 @@ public class Rect extends Shape {
 
     private int width, height;
     private String text = "";
+    private boolean rounded = false;
 
-    public Rect(Point xy, int w, int h, int color, boolean filled, String text) {
+    public Rect(Point xy, int w, int h, Color color, boolean filled, boolean rounded, String text) {
         super(xy, color, filled);
         this.text = text;
         this.width = w;
         this.height = h;
-    }
-
-    public Rect(Point xy, int w, int h, int color, boolean filled) {
-        super(xy, color, filled);
-        this.width = w;
-        this.height = h;
-    }
-
-    public Rect(Point xy, int w, int h, int color) {
-        super(xy, color);
-        this.width = w;
-        this.height = h;
+        this.rounded = rounded;
     }
 
     public Rect(Point xy, int w, int h) {
@@ -40,7 +31,6 @@ public class Rect extends Shape {
         this.width = w;
         this.height = h;
     }
-   
 
     public void setText(String text) {
         this.text = text;
@@ -67,17 +57,35 @@ public class Rect extends Shape {
     }
 
     public Point getCenter() {
-        return new Point(xy.getX() + width/2, xy.getY() + height/2);
+        return new Point(xy.getX() + width / 2, xy.getY() + height / 2);
+    }
+
+    private boolean getRounded() {
+        return rounded;
     }
 
     @Override
     public void draw(Graphics g, StackQueue appRef) {
-        if (getFilled()) {
-            g.fillRoundRect(xy.getX(), xy.getY(), width, height, 10, 10);
+        g.setColor(color);
+        if (getRounded()) {
+            if (getFilled()) {
+                g.fillRoundRect(xy.getX(), xy.getY(), width, height, 10, 500);
+            } else {
+                g.drawRoundRect(xy.getX(), xy.getY(), width, height, 10, 500);
+            }
         } else {
-            g.drawRoundRect(xy.getX(), xy.getY(), width, height, 10, 10);
+            if (getFilled()) {
+                g.fillRect(xy.getX(), xy.getY(), width, height);
+            } else {
+                g.drawRect(xy.getX(), xy.getY(), width, height);
+            }
         }
         if (!text.isEmpty()) {
+            if (color == Color.LIGHT_GRAY) {
+                g.setColor(Color.darkGray);
+            }else{
+                g.setColor(Color.LIGHT_GRAY);
+            }
             g.drawString(text, getCenter().getX() - (text.length()), getCenter().getY());
         }
     }

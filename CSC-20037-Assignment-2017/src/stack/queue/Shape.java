@@ -5,6 +5,8 @@
  */
 package stack.queue;
 
+import java.awt.Color;
+
 
 /**
  *
@@ -13,19 +15,19 @@ package stack.queue;
 public abstract class Shape implements Drawable {
 
     protected Point xy;
-    protected int color = 0x000000;
+    protected Color color;
     protected boolean filled = false;
 
     public Shape(Point xy) {
         this.xy = xy;
     }
 
-    public Shape(Point xy, int color) {
+    public Shape(Point xy, Color color) {
         this.xy = xy;
         this.color = color;
     }
 
-    public Shape(Point xy, int color, boolean filled) {
+    public Shape(Point xy, Color color, boolean filled) {
         this.xy = xy;
         this.color = color;
         this.filled = filled;
@@ -35,7 +37,7 @@ public abstract class Shape implements Drawable {
         return this.xy;
     }
 
-    public int getColor() {
+    public Color getColor() {
         return this.color;
     }
     
@@ -43,7 +45,11 @@ public abstract class Shape implements Drawable {
         return this.filled;
     }
     
-    public void setColor(int color){
+    public void setColor(Color color){
         this.color = color;
+    }
+    
+    public void setXY(Point xy){
+        this.xy = xy;
     }
 }

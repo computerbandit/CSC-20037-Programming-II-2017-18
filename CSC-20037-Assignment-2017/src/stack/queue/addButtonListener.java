@@ -3,6 +3,8 @@ package stack.queue;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,14 +20,22 @@ public class addButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-        //TODO This needs to be on Resize function need to be added
-        /*this si so that the stack is repostionsned after the frame is resized insuring that the stack is in the center.*/
-        
+
         Stack stack = app.getStack();
-        Canvas canvas = app.getCanvas();
-        stack.push(0);
-        canvas.repaint();
+        if (!stack.isFull()) {
+            Canvas canvas = app.getCanvas();
+            try {
+                stack.push(Integer.parseInt(app.dataInput().isEmpty() ? "0" : app.dataInput()));
+                //StackQueue.log("Item Pushed onto the stack");
+
+            } catch (NumberFormatException error) {
+                StackQueue.log("Error " + error.getMessage() + ", try again...");
+            }
+
+            canvas.repaint();
+        }else{
+            StackQueue.log("Stack is full");
+        }
     }
 
 }

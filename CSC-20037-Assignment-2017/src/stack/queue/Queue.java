@@ -56,22 +56,7 @@ public class Queue {
         }
         return null;
     }
-
-    public int find(Object obj) {
-        if (isEmpty()) {
-            return -2;
-        }
-        Node n = head;
-        for (int i = 0; i < size; i++) {
-            if (n.getObject() == obj) {
-                return i;
-            } else {
-                n = n.getNext();
-            }
-        }
-        return -1;
-    }
-
+    
     public Node peek() {
         return isEmpty() ? null : head;
     }
@@ -88,7 +73,7 @@ public class Queue {
         System.out.print("Size: " + size + "\n");
         for (int i = 0; i < size; i++) {
             System.out.print(i + ", ");
-            System.out.print(atIndex(i).getObject() + "\n");
+            System.out.print(atIndex(i).getData() + "\n");
         }
         System.out.print("\n");
     }

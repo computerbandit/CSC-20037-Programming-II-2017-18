@@ -27,6 +27,7 @@ public class StackQueue {
     private JMenu fileMenu, editMenu, aboutMenu;
     private JMenuItem newMenuItem, loadMenuItem, saveMenuItem, saveAsMenuItem;
     private static JTextArea msgBox;
+    private JTextField inputTextField;
     private JPanel toolPanel, dataPanel;
     private JButton stackButton, queueButton, addButton, removeButton;
     
@@ -40,7 +41,7 @@ public class StackQueue {
         initGUI();
         
         /*stack stuff*/
-        stack = new Stack();
+        stack = new Stack(32);
         queue = new Queue();
         
         appState = true;
@@ -82,9 +83,10 @@ public class StackQueue {
         canvas.setBackground(Color.white);
         
         
-        toolPanel = new JPanel(new GridLayout(10, 1));
+        toolPanel = new JPanel(new GridLayout(11, 1));
         toolPanel.setBorder(blackline);
         toolPanel.setPreferredSize(new Dimension(250, 400));
+        JPanel subPanel1 = new JPanel(new GridLayout(1, 2));
         
         stackButton = new JButton("Stack");
         stackButton.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -97,6 +99,9 @@ public class StackQueue {
         queueButton = new JButton("Queue");
         toolPanel.add(queueButton);
         toolPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
+        
+        inputTextField = new JTextField();
+        toolPanel.add(inputTextField);
         
         addButton = new JButton("Add");
         addButton.addActionListener(new addButtonListener(this));
@@ -165,8 +170,16 @@ public class StackQueue {
         return canvas;
     }
     
+    public String dataInput(){
+        return inputTextField.getText();
+    }
+    
     public Stack getStack() {
         return stack;
+    }
+    
+    public Queue getQueue(){
+        return queue;
     }
 
     private static class onResizeListener implements ComponentListener {
