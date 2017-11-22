@@ -12,7 +12,8 @@ import javax.swing.JPanel;
  *
  * @author w4f21
  */
-public class Canvas extends JPanel{
+public class Canvas extends JPanel {
+
     //this is just a quick test
     StackQueue app;
 
@@ -27,6 +28,10 @@ public class Canvas extends JPanel{
     }
 
     private void draw(Graphics g) {
-        app.getStack().draw(g, app);
+        if (app.appState) {
+            app.getStack().draw(g, app);
+        }else{
+            app.getQueue().draw(g, app);
+        }
     }
 }

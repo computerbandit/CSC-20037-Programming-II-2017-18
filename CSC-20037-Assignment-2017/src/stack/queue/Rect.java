@@ -6,6 +6,7 @@
 package stack.queue;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -67,11 +68,12 @@ public class Rect extends Shape {
     @Override
     public void draw(Graphics g, StackQueue appRef) {
         g.setColor(color);
+        g.setFont(new Font("Tahoma", Font.BOLD, 18));
         if (getRounded()) {
             if (getFilled()) {
-                g.fillRoundRect(xy.getX(), xy.getY(), width, height, 10, 500);
+                g.fillRoundRect(xy.getX(), xy.getY(), width, height, 10, 10);
             } else {
-                g.drawRoundRect(xy.getX(), xy.getY(), width, height, 10, 500);
+                g.drawRoundRect(xy.getX(), xy.getY(), width, height, 10, 10);
             }
         } else {
             if (getFilled()) {
@@ -83,7 +85,7 @@ public class Rect extends Shape {
         if (!text.isEmpty()) {
             if (color == Color.LIGHT_GRAY) {
                 g.setColor(Color.darkGray);
-            }else{
+            } else {
                 g.setColor(Color.LIGHT_GRAY);
             }
             g.drawString(text, getCenter().getX() - (text.length()), getCenter().getY());
