@@ -12,24 +12,16 @@ import java.awt.Graphics;
  *
  * @author w4f21
  */
-public class Queue implements Drawable {
+public class Queue extends LList implements Drawable {
 
-    private Node head;
-    private int size;
-
-    private final int MAX;
-
-    public Queue(int MAX) {
-        this.MAX = MAX;
-        head = null;
-        size = 0;
+    public Queue(int max) {
+        super(max);
     }
 
     public Node deQueue() {
         if (!isEmpty()) {
             Node n = head;
             head = head.getNext();
-            size--;
             return n;
         } else {
             return null;
@@ -39,60 +31,28 @@ public class Queue implements Drawable {
     public void enQueue(int val) {
         if (isEmpty()) {
             head = new Node(val, null);
-        } else if (size > 0) {
-            Node tail = this.atIndex(size - 1);
+        } else if (size(head) > 0) {
+            Node tail = this.atIndex(size(head) - 1);
             tail.setNext(new Node(val, null));
         }
-        size++;
     }
 
+    @Override
     public Node atIndex(int index) {
         if (isEmpty()) {
-            return null;
-        } else if (index >= size) {
-            return null;
+            return null; //
+        } else if (index >= size(head)) {
+            return null; //overflow error
         }
         Node n = head;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size(head); i++) {
             if (i == index) {
                 return n;
             } else {
                 n = n.getNext();
             }
         }
-        return null;
-    }
-
-    public Node peek() {
-        return isEmpty() ? null : head;
-    }
-
-    public int size() {
-        return size;
-    }
-
-    public boolean isFull() {
-        return (size == MAX);
-    }
-
-    public boolean isEmpty() {
-        return (size == 0);
-    }
-
-    public void clear() {
-        Node n = deQueue();
-        while (n != null) {
-            n = deQueue();
-        }
-    }
-
-    public void print() {
-        System.out.print("Size: " + size + "\n");
-        for (int i = 0; i < size; i++) {
-            System.out.print(i + ", ");
-            System.out.print(atIndex(i).getData() + "\n");
-        }
-        System.out.print("\n");
+        return null;//underflow error;
     }
 
     public static Queue reverseQueue(Queue queue) {
@@ -113,6 +73,7 @@ public class Queue implements Drawable {
 
     public static Stack toStack(Queue queue) {
         Stack stack = new Stack(queue.MAX);
+        queue = Queue.reverseQueue(queue);
         Node n = queue.deQueue();
         while (n != null) {
             stack.push(n.getData());

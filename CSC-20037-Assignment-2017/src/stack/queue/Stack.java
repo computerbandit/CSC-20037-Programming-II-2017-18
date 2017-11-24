@@ -12,23 +12,16 @@ import java.awt.Graphics;
  *
  * @author w4f21
  */
-public class Stack implements Drawable {
-
-    private int size;
-    private Node head;
-
-    private final int MAX;
-
+public class Stack extends LList implements Drawable {
+    
     public Stack(int max) {
-        head = null;
-        this.MAX = max;
+        super(max);
     }
 
     public Node pop() {
         if (!isEmpty()) {
             Node n = head;
             head = head.getNext();
-            size--;
             return n;
         } else {
             return null;
@@ -37,42 +30,9 @@ public class Stack implements Drawable {
 
     public void push(int data) {
         head = new Node(data, head);
-        size++;
-    }
-
-    public Node peek() {
-        return isEmpty() ? null : head;
-    }
-
-    public int size() {
-        return size;
-    }
-
-    public boolean isEmpty() {
-        return (size == 0);
-    }
-
-    public boolean isFull() {
-        return (size == MAX);
-    }
-
-    public Node atIndex(int index) {
-        if (isEmpty()) {
-            return null; //
-        } else if (index >= size) {
-            return null; //overflow error
-        }
-        Node n = head;
-        for (int i = size - 1; i >= 0; i--) {
-            if (i == index) {
-                return n;
-            } else {
-                n = n.getNext();
-            }
-        }
-        return null;//underflow error;
     }
     
+    @Override
     public void clear(){
         Node n = pop();
         while(n!=null){
@@ -100,15 +60,6 @@ public class Stack implements Drawable {
         return queue;
     }
 
-    public void print() {
-        System.out.print("Size: " + size + "\n");
-        for (int i = size - 1; i >= 0; i--) {
-            System.out.print(i + ", ");
-            System.out.print(atIndex(i).getData() + "\n");
-        }
-        System.out.print("\n");
-    }
-
     @Override
     public void draw(Graphics g, StackQueue appRef) {
 
@@ -133,7 +84,7 @@ public class Stack implements Drawable {
             index.setXY(new Point((collumWidth * (counter / 8)), height - ((counter % stackHeight) * rowHeight) - rowHeight));
             Rect data = dataTemplate;
             data.setText("" + n.getData());
-            data.setXY(new Point((collumWidth * (counter / 8)) + (1 * collumWidth / 16), height - ((counter % stackHeight) * rowHeight) - rowHeight));
+            data.setXY(new Point((collumWidth * (counter / 8)) + (1 * collumWidth / 4), height - ((counter % stackHeight) * rowHeight) - rowHeight));
             data.draw(g, appRef);
             index.draw(g, appRef);
             counter++;

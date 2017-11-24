@@ -5,11 +5,10 @@
  */
 package stack.queue;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.border.Border;
+import java.io.*;
+import java.net.URL;
 import javax.swing.border.LineBorder;
 
 /**
@@ -19,7 +18,6 @@ import javax.swing.border.LineBorder;
 public class StackQueue {
 
     //Borders
-    private Border blackline = BorderFactory.createLineBorder(Color.gray);
     private JFrame frame;
     private JMenuBar menubar;
     private JMenu fileMenu, editMenu, aboutMenu;
@@ -28,20 +26,23 @@ public class StackQueue {
     private JTextField inputTextField;
     private JPanel toolPanel, dataPanel;
     private JButton stackButton, queueButton, addButton, removeButton, removeAllButton, reverseButton, clearMsgBox;
+    private JLabel[] info = new JLabel[3];
+
+    URL url = getClass().getResource("stack.txt");
+    File file = new File(url.getPath());
+    String line = null;
 
     private Canvas canvas;
-    //Drawable stack and queue
     private Stack stack;
     private Queue queue;
     public boolean appState;
 
     public StackQueue() {
         initGUI();
-        appState = false;
-        /*stack stuff*/
-        stack = new Stack(32);
-        queue = new Queue(32);
-
+        appState = true;
+        stack = new Stack(15);
+        queue = new Queue(15);
+        loadFile(file);
     }
 
     private void initGUI() {
@@ -76,10 +77,15 @@ public class StackQueue {
         canvas.addMouseListener(new CanvasMouseListener(this));
         canvas.setBackground(Color.white);
 
-        toolPanel = new JPanel(new GridLayout(11, 1));
-        toolPanel.setBorder(blackline);
+        toolPanel = new JPanel(new GridLayout(8, 1));
+        toolPanel.setBorder(new LineBorder(Color.gray));
         toolPanel.setPreferredSize(new Dimension(250, 400));
         toolPanel.setBackground(Color.white);
+
+        JPanel subPanel3 = new JPanel(new GridLayout(1, 3));
+        
+        info[] = new JLabel(); 
+        
 
         JPanel subPanel2 = new JPanel(new GridLayout(1, 2));
         stackButton = new JButton("Stack");
@@ -118,12 +124,12 @@ public class StackQueue {
         toolPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
 
         reverseButton = new JButton("Reverse");
-        reverseButton = buttonDesign(reverseButton, Color.orange);
+        reverseButton = buttonDesign(reverseButton, Color.BLACK);
         reverseButton.addActionListener(new reverseButtonListener(this));
         toolPanel.add(reverseButton);
 
         dataPanel = new JPanel();
-        dataPanel.setBorder(blackline);
+        dataPanel.setBorder(new LineBorder(Color.gray));
         dataPanel.setPreferredSize(new Dimension(400, 200));
 
         //msgbox
@@ -134,11 +140,11 @@ public class StackQueue {
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         dataPanel = new JPanel(new BorderLayout());
-        dataPanel.setBorder(blackline);
-        
+        dataPanel.setBorder(new LineBorder(Color.gray));
+
         clearMsgBox = new JButton("Clear");
-        clearMsgBox = buttonDesign(clearMsgBox, Color.white);
-        clearMsgBox.addActionListener( new clearMsgBoxButtonListener());
+        clearMsgBox = buttonDesign(clearMsgBox, Color.BLACK);
+        clearMsgBox.addActionListener(new clearMsgBoxButtonListener());
         dataPanel.add(clearMsgBox);
 
         dataPanel.setPreferredSize(new Dimension(600, 120));
@@ -174,8 +180,10 @@ public class StackQueue {
 
     public static void log(String s) {
         msgBox.append("\n " + s);
+        msgBox.setCaretPosition(msgBox.getText().length());
     }
-    public static void clearLog(){
+
+    public static void clearLog() {
         msgBox.setText("");
     }
 
@@ -221,4 +229,28 @@ public class StackQueue {
         return btn;
     }
 
+    private void loadFile(File file) {
+        //loading defualt file with from the src folders
+        try {
+            //Filereader with correctly located file
+            FileReader fileReader = new FileReader(file);
+            //wrapped in a BufferedReader.
+            BufferedReader bufferedReader;
+            bufferedReader = new BufferedReader(fileReader);
+            //Displaying Loaded file to the user in the msg Box.
+            log("Loading Defualt File...");
+            //iterating through each line of the text file until the end.
+            while ((line = bufferedReader.readLine()) != null) {
+                log("Loading value: " + line);
+                stack.push(Integer.parseInt(line));
+            }
+            bufferedReader.close();
+            log("File Loaded");
+        } catch (FileNotFoundException ex) {
+            System.out.println(
+                    "Unable to open file '" + file + "'");
+        } catch (IOException ex) {
+            System.out.println("Error reading file '" + file + "'");
+        }
+    }
 }

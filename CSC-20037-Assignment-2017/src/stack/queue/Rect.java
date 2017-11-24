@@ -7,6 +7,7 @@ package stack.queue;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 
 /**
@@ -88,7 +89,8 @@ public class Rect extends Shape {
             } else {
                 g.setColor(Color.LIGHT_GRAY);
             }
-            g.drawString(text, getCenter().getX() - (text.length()), getCenter().getY());
+            
+            g.drawString(text, getCenter().getX() - (g.getFontMetrics().stringWidth(text)/2), getCenter().getY());
         }
     }
 }
