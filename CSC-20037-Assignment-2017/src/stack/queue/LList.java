@@ -61,4 +61,18 @@ public abstract class LList {
         System.out.print("\n");
     }
 
+    public void setMax(int max) {
+        this.MAX = max;
+        if (MAX < size(head)) {
+            Stack reverse = Stack.reverseStack((Stack) this);
+            for (int i = 0; i < size(head) - MAX; i++) {
+                reverse.pop();
+            }
+            head = Stack.reverseStack(reverse).head;
+        }
+    }
+
+    public int getMax() {
+        return MAX;
+    }
 }

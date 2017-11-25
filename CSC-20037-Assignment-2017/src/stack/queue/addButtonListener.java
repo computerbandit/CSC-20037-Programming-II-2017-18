@@ -23,6 +23,7 @@ public class addButtonListener implements ActionListener {
             if (!stack.isFull()) {
                 try {
                     stack.push(Integer.parseInt(app.dataInput().isEmpty() ? "0" : app.dataInput()));
+                    
                     app.getRemoveButton().setBackground(new Color(55, 135, 56));
                     app.getRemoveButton().setForeground(new Color(55, 135, 56));
                     app.getRemoveButton().repaint();
@@ -61,6 +62,7 @@ public class addButtonListener implements ActionListener {
 
         }
         app.getCanvas().repaint();
+        app.updateInfo();
     }
 
 }

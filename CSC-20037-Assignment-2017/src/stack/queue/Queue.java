@@ -81,6 +81,18 @@ public class Queue extends LList implements Drawable {
         }
         return stack;
     }
+    
+    @Override
+    public void setMax(int max) {
+        this.MAX = max;
+        if (MAX < size(head)) {
+            Queue reverse = Queue.reverseQueue((Queue) this);
+            for (int i = 0; i < size(head) - MAX; i++) {
+                reverse.deQueue();
+            }
+            head = Queue.reverseQueue(reverse).head;
+        }
+    }
 
     @Override
     public void draw(Graphics g, StackQueue appRef) {

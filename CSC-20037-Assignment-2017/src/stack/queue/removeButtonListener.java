@@ -48,5 +48,6 @@ public class removeButtonListener implements ActionListener {
         }
 
         app.getCanvas().repaint();
+        app.updateInfo();
     }
 }

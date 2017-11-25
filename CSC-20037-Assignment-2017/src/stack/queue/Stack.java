@@ -68,7 +68,7 @@ public class Stack extends LList implements Drawable {
         int height = canvas.getHeight();
 
         int max = appRef.getStack().MAX;
-
+        
         int stackHeight = (max >= 8 ? 8 : max);
 
         int rowHeight = height / stackHeight;

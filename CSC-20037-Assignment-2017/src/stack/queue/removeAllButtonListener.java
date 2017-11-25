@@ -29,6 +29,7 @@ public class removeAllButtonListener implements ActionListener {
         }
         StackQueue.log("Data Cleared!");
         app.getCanvas().repaint();
+        app.updateInfo();
     }
 
 }

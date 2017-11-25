@@ -22,10 +22,11 @@ public class stackButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(!app.appState){
+        if (!app.appState) {
             app.appState = true;
             app.setStack(Queue.toStack(app.getQueue()));
             app.getCanvas().repaint();
         }
+        app.updateInfo();
     }
 }

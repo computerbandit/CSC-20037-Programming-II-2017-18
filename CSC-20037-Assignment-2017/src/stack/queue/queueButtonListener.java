@@ -27,5 +27,6 @@ public class queueButtonListener implements ActionListener {
             app.setQueue(Stack.toQueue(app.getStack()));
             app.getCanvas().repaint();
         }
+        app.updateInfo();
     }
 }

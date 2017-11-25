@@ -69,7 +69,7 @@ public class Rect extends Shape {
     @Override
     public void draw(Graphics g, StackQueue appRef) {
         g.setColor(color);
-        g.setFont(new Font("Tahoma", Font.BOLD, 18));
+        g.setFont(appRef.font);
         if (getRounded()) {
             if (getFilled()) {
                 g.fillRoundRect(xy.getX(), xy.getY(), width, height, 10, 10);

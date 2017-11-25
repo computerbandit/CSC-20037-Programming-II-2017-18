@@ -1,21 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stack.queue;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.net.URL;
 import javax.swing.border.LineBorder;
 
 /**
  *
  * @author w4f21
  */
-public class StackQueue {
+public final class StackQueue {
+
+    public Font font;
 
     //Borders
     private JFrame frame;
@@ -26,10 +22,9 @@ public class StackQueue {
     private JTextField inputTextField;
     private JPanel toolPanel, dataPanel;
     private JButton stackButton, queueButton, addButton, removeButton, removeAllButton, reverseButton, clearMsgBox;
-    private JLabel[] info = new JLabel[3];
+    private final JLabel[] info = new JLabel[3];
 
-    URL url = getClass().getResource("stack.txt");
-    File file = new File(url.getPath());
+    File file = new File("stack.txt");
     String line = null;
 
     private Canvas canvas;
@@ -38,6 +33,7 @@ public class StackQueue {
     public boolean appState;
 
     public StackQueue() {
+        font = new Font("Tahoma", Font.BOLD, 18);
         initGUI();
         appState = true;
         stack = new Stack(15);
@@ -61,6 +57,7 @@ public class StackQueue {
 
         newMenuItem = new JMenuItem("New");
         loadMenuItem = new JMenuItem("Load");
+        loadMenuItem.addActionListener(new loadFileListener(this));
         saveMenuItem = new JMenuItem("Save");
         saveAsMenuItem = new JMenuItem("Save As");
 
@@ -74,7 +71,6 @@ public class StackQueue {
         canvas.setBorder(new LineBorder(Color.gray));
         canvas.setPreferredSize(new Dimension(500, 500));
         canvas.setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
-        canvas.addMouseListener(new CanvasMouseListener(this));
         canvas.setBackground(Color.white);
 
         toolPanel = new JPanel(new GridLayout(8, 1));
@@ -82,21 +78,39 @@ public class StackQueue {
         toolPanel.setPreferredSize(new Dimension(250, 400));
         toolPanel.setBackground(Color.white);
 
-        JPanel subPanel3 = new JPanel(new GridLayout(1, 3));
-        
-        info[] = new JLabel(); 
-        
+        JPanel subPanel3 = new JPanel(new GridLayout(1, 2));
 
-        JPanel subPanel2 = new JPanel(new GridLayout(1, 2));
+        info[0] = new JLabel("Stack");
+        info[0].setFont(font);
+        info[0].setHorizontalAlignment(0);
+        info[1] = new JLabel("Size: ");
+        info[1].setFont(font);
+
+        subPanel3.add(info[0]);
+        subPanel3.add(info[1]);
+        toolPanel.add(subPanel3);
+
+        JPanel subPanel2 = new JPanel(new GridLayout(2, 2));
         stackButton = new JButton("Stack");
         stackButton = buttonDesign(stackButton, new Color(71, 55, 135));
         stackButton.addActionListener(new stackButtonListener(this));
         subPanel2.add(stackButton);
 
+        JButton incMax = new JButton("+");
+        incMax = buttonDesign(incMax, new Color(119, 244, 66));
+        incMax.addActionListener(new incMaxButtonListener(this));
+        subPanel2.add(incMax);
+
         queueButton = new JButton("Queue");
         queueButton = buttonDesign(queueButton, new Color(71, 55, 135));
         queueButton.addActionListener(new queueButtonListener(this));
         subPanel2.add(queueButton);
+
+        JButton decMax = new JButton("-");
+        decMax = buttonDesign(decMax, new Color(244, 65, 65));
+        decMax.addActionListener(new decMaxButtonListener(this));
+        subPanel2.add(decMax);
+
         toolPanel.add(subPanel2);
 
         toolPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
@@ -117,6 +131,7 @@ public class StackQueue {
         removeButton = buttonDesign(removeButton, new Color(55, 135, 56));
         removeButton.addActionListener(new removeButtonListener(this));
         toolPanel.add(removeButton);
+
         removeAllButton = new JButton("Remove All");
         removeAllButton = buttonDesign(removeAllButton, Color.RED);
         removeAllButton.addActionListener(new removeAllButtonListener(this));
@@ -219,6 +234,10 @@ public class StackQueue {
         return removeButton;
     }
 
+    public JLabel[] getInfo() {
+        return info;
+    }
+
     public JButton buttonDesign(JButton btn, Color c) {
         btn.setFont(new Font("Tahoma", Font.BOLD, 12));
         btn.setBackground(c);
@@ -229,7 +248,7 @@ public class StackQueue {
         return btn;
     }
 
-    private void loadFile(File file) {
+    public void loadFile(File file) {
         //loading defualt file with from the src folders
         try {
             //Filereader with correctly located file
@@ -240,10 +259,17 @@ public class StackQueue {
             //Displaying Loaded file to the user in the msg Box.
             log("Loading Defualt File...");
             //iterating through each line of the text file until the end.
+            stack.clear();
+            int lineCount = 0;
             while ((line = bufferedReader.readLine()) != null) {
+                lineCount++;
+                if (stack.getMax() < lineCount) {
+                    stack.setMax(stack.getMax() + 1);
+                }
                 log("Loading value: " + line);
                 stack.push(Integer.parseInt(line));
             }
+            appState = true;
             bufferedReader.close();
             log("File Loaded");
         } catch (FileNotFoundException ex) {
@@ -252,5 +278,18 @@ public class StackQueue {
         } catch (IOException ex) {
             System.out.println("Error reading file '" + file + "'");
         }
+        canvas.repaint();
+        updateInfo();
+    }
+
+    public void updateInfo() {
+        if (appState) {
+            info[0].setText("Stack");
+            info[1].setText("Size: " + stack.size(stack.peek()) + "/" + stack.MAX);
+        } else {
+            info[0].setText("Queue");
+            info[1].setText("Size: " + queue.size(queue.peek()) + "/" + queue.MAX);
+        }
+
     }
 }
