@@ -13,7 +13,7 @@ import java.awt.Graphics;
  * @author w4f21
  */
 public class Stack extends LList implements Drawable {
-    
+
     public Stack(int max) {
         super(max);
     }
@@ -31,13 +31,16 @@ public class Stack extends LList implements Drawable {
     public void push(int data) {
         head = new Node(data, head);
     }
-    
+
     @Override
-    public void clear(){
+    public void clear() {
+        String stackList = "";
         Node n = pop();
-        while(n!=null){
+        while (n != null) {
+            stackList += "" + n.getData() + " ";
             n = pop();
         }
+        StackQueue.log(stackList);
     }
 
     public static Stack reverseStack(Stack stack) {
@@ -68,7 +71,7 @@ public class Stack extends LList implements Drawable {
         int height = canvas.getHeight();
 
         int max = appRef.getStack().MAX;
-        
+
         int stackHeight = (max >= 8 ? 8 : max);
 
         int rowHeight = height / stackHeight;

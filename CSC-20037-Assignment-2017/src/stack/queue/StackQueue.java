@@ -21,10 +21,12 @@ public final class StackQueue {
     private static JTextArea msgBox;
     private JTextField inputTextField;
     private JPanel toolPanel, dataPanel;
-    private JButton stackButton, queueButton, addButton, removeButton, removeAllButton, reverseButton, clearMsgBox;
+    private JButton stackButton, queueButton, addButton, removeButton, removeAllButton, reverseButton, clearMsgBox, emptyStackButton;
     private final JLabel[] info = new JLabel[3];
 
-    File file = new File("stack.txt");
+    String path = getClass().getResource("stack.txt").toString();
+
+    File file = new File(path.substring("file:".length()));
     String line = null;
 
     private Canvas canvas;
@@ -47,7 +49,7 @@ public final class StackQueue {
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setMinimumSize(new Dimension(800, 720));
-        frame.setTitle("CSC-20037 Stacks and Queues || 0.2sa");
+        frame.setTitle("CSC-20037 Stacks and Queues");
 
         //Menu Bar Stuff
         menubar = new JMenuBar();
@@ -143,27 +145,30 @@ public final class StackQueue {
         reverseButton.addActionListener(new reverseButtonListener(this));
         toolPanel.add(reverseButton);
 
-        dataPanel = new JPanel();
+        dataPanel = new JPanel(new GridLayout(1, 2));
+        dataPanel.setPreferredSize(new Dimension(200, 200));
         dataPanel.setBorder(new LineBorder(Color.gray));
-        dataPanel.setPreferredSize(new Dimension(400, 200));
-
         //msgbox
-        msgBox = new JTextArea(4, 58);
+        msgBox = new JTextArea();
+        msgBox.setFont(font);
         msgBox.setEditable(false);
-
         JScrollPane scroll = new JScrollPane(msgBox);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        dataPanel = new JPanel(new BorderLayout());
-        dataPanel.setBorder(new LineBorder(Color.gray));
-
+        dataPanel.add(scroll);
+        
+        JPanel subPanel4 = new JPanel(new GridLayout(2,1));
+        
         clearMsgBox = new JButton("Clear");
         clearMsgBox = buttonDesign(clearMsgBox, Color.BLACK);
         clearMsgBox.addActionListener(new clearMsgBoxButtonListener());
-        dataPanel.add(clearMsgBox);
-
-        dataPanel.setPreferredSize(new Dimension(600, 120));
-        dataPanel.add(scroll, BorderLayout.EAST);
+        
+        emptyStackButton = new JButton("Empty Stack");
+        emptyStackButton = buttonDesign(emptyStackButton, Color.BLACK);
+        emptyStackButton.addActionListener(new emptyStackButtonListener(this));
+        subPanel4.add(emptyStackButton);
+        
+        subPanel4.add(clearMsgBox);
+        dataPanel.add(subPanel4);
 
         menubar.add(fileMenu);
         menubar.add(editMenu);
@@ -239,7 +244,7 @@ public final class StackQueue {
     }
 
     public JButton buttonDesign(JButton btn, Color c) {
-        btn.setFont(new Font("Tahoma", Font.BOLD, 12));
+        btn.setFont(font);
         btn.setBackground(c);
         btn.setForeground(c);
         btn.setFocusPainted(false);
@@ -273,10 +278,9 @@ public final class StackQueue {
             bufferedReader.close();
             log("File Loaded");
         } catch (FileNotFoundException ex) {
-            System.out.println(
-                    "Unable to open file '" + file + "'");
+            log("Unable to open file '" + file + "'");
         } catch (IOException ex) {
-            System.out.println("Error reading file '" + file + "'");
+            log("Error reading file '" + file + "'");
         }
         canvas.repaint();
         updateInfo();

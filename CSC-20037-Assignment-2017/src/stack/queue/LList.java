@@ -53,10 +53,9 @@ public abstract class LList {
     }
 
     public void print() {
-        System.out.print("Size: " + size(head) + "\n");
+        StackQueue.log("Size: " + size(head) + "\n");
         for (int i = size(head) - 1; i >= 0; i--) {
-            System.out.print(i + ", ");
-            System.out.print(atIndex(i).getData() + "\n");
+            StackQueue.log(i + ", " + atIndex(i).getData());
         }
         System.out.print("\n");
     }

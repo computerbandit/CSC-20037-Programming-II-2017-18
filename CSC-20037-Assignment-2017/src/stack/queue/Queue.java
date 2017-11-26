@@ -81,7 +81,7 @@ public class Queue extends LList implements Drawable {
         }
         return stack;
     }
-    
+
     @Override
     public void setMax(int max) {
         this.MAX = max;
