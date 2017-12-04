@@ -40,7 +40,11 @@ public final class StackQueue {
         appState = true;
         stack = new Stack(15);
         queue = new Queue(15);
-        loadFile(file);
+        try {
+            loadFile(file);
+        } catch (LinkedListException ex) {
+            log(ex.getCause().getMessage());
+        }
     }
 
     private void initGUI() {
@@ -155,18 +159,18 @@ public final class StackQueue {
         JScrollPane scroll = new JScrollPane(msgBox);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         dataPanel.add(scroll);
-        
-        JPanel subPanel4 = new JPanel(new GridLayout(2,1));
-        
+
+        JPanel subPanel4 = new JPanel(new GridLayout(2, 1));
+
         clearMsgBox = new JButton("Clear");
         clearMsgBox = buttonDesign(clearMsgBox, Color.BLACK);
         clearMsgBox.addActionListener(new clearMsgBoxButtonListener());
-        
+
         emptyStackButton = new JButton("Empty Stack");
         emptyStackButton = buttonDesign(emptyStackButton, Color.BLACK);
         emptyStackButton.addActionListener(new emptyStackButtonListener(this));
         subPanel4.add(emptyStackButton);
-        
+
         subPanel4.add(clearMsgBox);
         dataPanel.add(subPanel4);
 
@@ -239,6 +243,10 @@ public final class StackQueue {
         return removeButton;
     }
 
+    public JButton getEmptyStackButton() {
+        return emptyStackButton;
+    }
+
     public JLabel[] getInfo() {
         return info;
     }
@@ -253,7 +261,7 @@ public final class StackQueue {
         return btn;
     }
 
-    public void loadFile(File file) {
+    public void loadFile(File file) throws LinkedListException {
         //loading defualt file with from the src folders
         try {
             //Filereader with correctly located file
@@ -264,17 +272,29 @@ public final class StackQueue {
             //Displaying Loaded file to the user in the msg Box.
             log("Loading Defualt File...");
             //iterating through each line of the text file until the end.
-            stack.clear();
-            int lineCount = 0;
-            while ((line = bufferedReader.readLine()) != null) {
-                lineCount++;
-                if (stack.getMax() < lineCount) {
-                    stack.setMax(stack.getMax() + 1);
+            if (appState) {
+                stack.clear();
+                int lineCount = 0;
+                while ((line = bufferedReader.readLine()) != null) {
+                    lineCount++;
+                    if (stack.getMax() < lineCount) {
+                        stack.setMax(stack.getMax() + 1);
+                    }
+                    log("Loading value: " + line);
+                    stack.push(Integer.parseInt(line));
                 }
-                log("Loading value: " + line);
-                stack.push(Integer.parseInt(line));
+            } else {
+                queue.clear();
+                int lineCount = 0;
+                while ((line = bufferedReader.readLine()) != null) {
+                    lineCount++;
+                    if (queue.getMax() < lineCount) {
+                        queue.setMax(queue.getMax() + 1);
+                    }
+                    log("Loading value: " + line);
+                    queue.enQueue(Integer.parseInt(line));
+                }
             }
-            appState = true;
             bufferedReader.close();
             log("File Loaded");
         } catch (FileNotFoundException ex) {

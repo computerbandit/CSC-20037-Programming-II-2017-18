@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package stack.queue;
 
 import java.awt.Graphics;
@@ -11,7 +7,14 @@ import java.awt.Graphics;
  *
  * @author w4f21
  */
+
+/*
+ * Drawable interface:
+ * This interface is only used once in the program (Rect class) this is however
+ * only used to make any onbject drawable to a canvas.
+ */
 public interface Drawable {
     
-    void draw(Graphics g, StackQueue appRef);
+    void draw(Graphics g, StackQueue appRef); // draw method dictates new drawable ojects while passing the graphics object.
+    
 }

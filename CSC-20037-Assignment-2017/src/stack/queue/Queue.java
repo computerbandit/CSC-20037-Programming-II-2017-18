@@ -28,7 +28,7 @@ public class Queue extends LList implements Drawable {
         }
     }
 
-    public void enQueue(int val) {
+    public void enQueue(int val) throws LinkedListException{
         if (isEmpty()) {
             head = new Node(val, null);
         } else if (size(head) > 0) {
@@ -38,11 +38,11 @@ public class Queue extends LList implements Drawable {
     }
 
     @Override
-    public Node atIndex(int index) {
+    public Node atIndex(int index) throws LinkedListException {
         if (isEmpty()) {
-            return null; //
+            throw new EmptyListException("The data structure is empty!");
         } else if (index >= size(head)) {
-            return null; //overflow error
+            throw new ListTraversalException("Index out of bounds of the list");
         }
         Node n = head;
         for (int i = 0; i < size(head); i++) {
@@ -52,10 +52,10 @@ public class Queue extends LList implements Drawable {
                 n = n.getNext();
             }
         }
-        return null;//underflow error;
+        throw new ListTraversalException("Index out of bounds of the list");
     }
 
-    public static Queue reverseQueue(Queue queue) {
+    public static Queue reverseQueue(Queue queue) throws LinkedListException {
         Node n = queue.head;
         Queue reverse = new Queue(queue.MAX);
         Stack stack = new Stack(queue.MAX);
@@ -71,7 +71,7 @@ public class Queue extends LList implements Drawable {
         return reverse;
     }
 
-    public static Stack toStack(Queue queue) {
+    public static Stack toStack(Queue queue) throws LinkedListException {
         Stack stack = new Stack(queue.MAX);
         queue = Queue.reverseQueue(queue);
         Node n = queue.deQueue();
@@ -86,11 +86,16 @@ public class Queue extends LList implements Drawable {
     public void setMax(int max) {
         this.MAX = max;
         if (MAX < size(head)) {
-            Queue reverse = Queue.reverseQueue((Queue) this);
-            for (int i = 0; i < size(head) - MAX; i++) {
-                reverse.deQueue();
+            Queue reverse;
+            try {
+                reverse = Queue.reverseQueue((Queue) this);
+                for (int i = 0; i < size(head) - MAX; i++) {
+                    reverse.deQueue();
+                }
+                head = Queue.reverseQueue(reverse).head;
+            } catch (LinkedListException ex) {
+                StackQueue.log(ex.getMessage());
             }
-            head = Queue.reverseQueue(reverse).head;
         }
     }
 

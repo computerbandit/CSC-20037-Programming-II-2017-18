@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package stack.queue;
 
 import java.awt.Graphics;
@@ -12,9 +7,14 @@ import javax.swing.JPanel;
  *
  * @author w4f21
  */
+
+/*
+ * Canvas Class:
+ * The Canvas class extends JPanel and is used to call the draw functions
+ * of both the stack and queue depending on the state of the program.
+ */
 public class Canvas extends JPanel {
 
-    //this is just a quick test
     StackQueue app;
 
     public Canvas(StackQueue app) {
@@ -30,7 +30,7 @@ public class Canvas extends JPanel {
     private void draw(Graphics g) {
         if (app.appState) {
             app.getStack().draw(g, app);
-        }else{
+        } else {
             app.getQueue().draw(g, app);
         }
     }

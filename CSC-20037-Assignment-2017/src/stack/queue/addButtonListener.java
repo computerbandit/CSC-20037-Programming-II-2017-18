@@ -51,6 +51,8 @@ public class addButtonListener implements ActionListener {
 
                 } catch (NumberFormatException error) {
                     StackQueue.log("Error " + error.getMessage() + ", try again...");
+                } catch (LinkedListException ex) {
+                    StackQueue.log(ex.getCause().getMessage());
                 }
 
             } else {

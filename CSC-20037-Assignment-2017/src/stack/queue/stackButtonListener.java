@@ -15,8 +15,12 @@ public class stackButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (!appRef.appState) {
             appRef.appState = true;
-            appRef.setStack(Queue.toStack(appRef.getQueue()));
-
+            try {
+                appRef.setStack(Queue.toStack(appRef.getQueue()));
+            } catch (LinkedListException ex) {
+                StackQueue.log(ex.getCause().getMessage());
+            }
+            appRef.getEmptyStackButton().setEnabled(true);
             appRef.getCanvas().repaint();
         }
         appRef.updateInfo();

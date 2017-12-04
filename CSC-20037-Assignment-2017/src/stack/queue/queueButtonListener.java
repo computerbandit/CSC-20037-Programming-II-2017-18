@@ -7,26 +7,30 @@ package stack.queue;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 /**
  *
  * @author w4f21
  */
 public class queueButtonListener implements ActionListener {
 
-    StackQueue app;
+    StackQueue appRef;
 
-    public queueButtonListener(StackQueue app) {
-        this.app = app;
+    public queueButtonListener(StackQueue appRef) {
+        this.appRef = appRef;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (app.appState) {
-            app.appState = false;
-            app.setQueue(Stack.toQueue(app.getStack()));
-            app.getCanvas().repaint();
+        if (appRef.appState) {
+            appRef.appState = false;
+            try {
+                appRef.setQueue(Stack.toQueue(appRef.getStack()));
+            } catch (LinkedListException ex) {
+                StackQueue.log(ex.getCause().getMessage());
+            }
+            appRef.getEmptyStackButton().setEnabled(false);
+            appRef.getCanvas().repaint();
         }
-        app.updateInfo();
+        appRef.updateInfo();
     }
 }

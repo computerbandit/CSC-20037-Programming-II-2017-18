@@ -7,7 +7,6 @@ package stack.queue;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 /**
  *
  * @author w4f21
@@ -26,7 +25,11 @@ public class reverseButtonListener implements ActionListener {
         if (app.appState) {
             app.setStack(Stack.reverseStack(app.getStack()));
         } else {
-            app.setQueue(Queue.reverseQueue(app.getQueue()));
+            try {
+                app.setQueue(Queue.reverseQueue(app.getQueue()));
+            } catch (LinkedListException ex) {
+                StackQueue.log(ex.getCause().getMessage());
+            }
         }
         app.getCanvas().repaint();
     }

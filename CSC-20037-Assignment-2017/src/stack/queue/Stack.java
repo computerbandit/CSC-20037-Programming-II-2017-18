@@ -53,7 +53,7 @@ public class Stack extends LList implements Drawable {
         return reverse;
     }
 
-    public static Queue toQueue(Stack stack) {
+    public static Queue toQueue(Stack stack) throws LinkedListException {
         Queue queue = new Queue(stack.MAX);
         Node n = stack.pop();
         while (n != null) {

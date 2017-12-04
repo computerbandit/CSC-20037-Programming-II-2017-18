@@ -24,6 +24,7 @@ public class emptyStackButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(appRef.appState){
             appRef.getStack().clear();
+            appRef.updateInfo();
             appRef.getCanvas().repaint();
         }
     }

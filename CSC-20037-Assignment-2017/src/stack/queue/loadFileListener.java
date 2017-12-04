@@ -20,7 +20,11 @@ public class loadFileListener implements ActionListener {
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             StackQueue.log("Selected file: " + selectedFile.getAbsolutePath());
-            appRef.loadFile(selectedFile);
+            try {
+                appRef.loadFile(selectedFile);
+            } catch (LinkedListException ex) {
+                StackQueue.log(ex.getCause().getMessage());
+            }
             
         }
 
