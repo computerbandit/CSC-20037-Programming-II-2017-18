@@ -10,7 +10,7 @@ public abstract class LList {
     protected Node head;    //head is the current first NODE in the list.
     protected int MAX;      //MAX is the current maximum items allowed in the list strucute.
     
-    //constructor
+    //constructor(int)
     public LList(int max) {
         head = null;        //head node is set to null by defualt.
         this.MAX = max;     //MAX variable set by consturctor params.
@@ -21,7 +21,7 @@ public abstract class LList {
         return isEmpty() ? null : head; // returns null is the list is empty and returns head if not.
     }
     
-    //Method size() recursive method which evaluated the number of nodes in the list.
+    //Method size(Node) recursive method which evaluated the number of nodes in the list.
     public int size(Node head) {
         //pass the head of the list.
         if (head == null) {
@@ -42,36 +42,38 @@ public abstract class LList {
         return (size(head) == MAX);
     }
     
-    //
+    //Method atIndex(int) this method returns the node at a given index. **IMPORTANT**
     public Node atIndex(int index) throws LinkedListException {
-        if (isEmpty()) {
+        if (isEmpty()) {    //if the list is empty then the the exeption will hadle it.
             throw new EmptyListException("The data structure is empty!");
-        } else if (index >= size(head)) {
+        } else if (index >= size(head)) { //if the index is outside the bounds of the list then it is handled
             throw new ListTraversalException("Index out of bounds of the list");
         }
-        Node n = head;
-        for (int i = size(head) - 1; i >= 0; i--) {
-            if (i == index) {
+        Node n = head;                                      //gets the head of the list and assigns it to a new Node object .
+        for (int i = size(head) - 1; i >= 0; i--) {         //loop through i from the (size of the list - 1)down to 0.
+            if (i == index) {                               //if the index is equal to the current value of i then return the current node
                 return n;
-            } else {
+            } else {                                        //else the next node overrides the current node.
                 n = n.getNext();
             }
         }
-        throw new ListTraversalException("Index out of bounds of the list");
+        throw new ListTraversalException("Index out of bounds of the list"); //if the list some how did not return a value then this is handled 
     }
 
+    //Method clear() this method dereferances the head of the list which means that the entire list will be destroyed in the system.gc
     public void clear() {
         head = null;
     }
-
+    
+    //Method print() this method is used to log out the data in the list.
     public void print() throws LinkedListException {
-        StackQueue.log("Size: " + size(head) + "\n");
-        for (int i = size(head) - 1; i >= 0; i--) {
-            StackQueue.log(i + ", " + atIndex(i).getData());
+        StackQueue.log("Size: " + size(head) + "\n");           //prints the size of the list
+        for (int i = size(head) - 1; i >= 0; i--) {             
+            StackQueue.log(i + ", " + atIndex(i).getData());    //prints each item in the list.
         }
-        System.out.print("\n");
+        System.out.print("\n");          
     }
-
+   
     public void setMax(int max) {
         this.MAX = max;
         if (MAX < size(head)) {
